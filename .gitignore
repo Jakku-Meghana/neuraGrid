@@ -17,6 +17,8 @@ Thumbs.db
 
 # Data & outputs
 *.log
+.csv
+
 
 # IDE
 .vscode/

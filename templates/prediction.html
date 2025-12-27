@@ -133,12 +133,12 @@
         </div>
     </div>
     
-    <div class="forecast-graph">
+    <!-- <div class="forecast-graph">
         <h2>Forecast Accuracy</h2>
         <p>Comparison of predicted vs actual demand for the past 7 days</p>
         <div id="accuracyChart"></div>
     </div>
-</div>
+</div> -->
 {% endblock %}
 
 {% block extra_js %}
@@ -177,7 +177,9 @@ function initCharts() {
                     fill: forecastData.forecastDays === 1 ? true : true,
                     tension: forecastData.forecastDays === 1 ? 0 : 0.4,
                     pointRadius: forecastData.forecastDays === 1 ? 0 : 5,
-                    pointHoverRadius: forecastData.forecastDays === 1 ? 0 : 7
+                    pointHoverRadius: forecastData.forecastDays === 1 ? 0 : 7,
+                    barThickness: forecastData.forecastDays === 1 ? 80 : undefined,
+                    maxBarThickness: forecastData.forecastDays === 1 ? 80 : undefined                
                 }
             ]
         },

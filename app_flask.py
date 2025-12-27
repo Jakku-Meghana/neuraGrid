@@ -5,7 +5,8 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 import tensorflow as tf
-from appPred import predict_next_day, predict_next_7_days
+from appPred import predict_next_day, predict_next_7_days, get_weather_impact
+
 
 # Load environment variables
 load_dotenv()
@@ -78,10 +79,35 @@ def api_forecast(days=1):
             "peak_demand": float(max(gru_pred)),
             "min_demand": float(min(gru_pred))
         })
-        
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+@app.route('/weather-impact')
+def weather_impact():
+    try:
+        weather = get_weather_impact()
+        return render_template('weather.html', weather_data=weather)
+    except Exception as e:
+        error_msg = f"Error loading weather impact data: {str(e)}"
+        print(error_msg)
+        import traceback
+        traceback.print_exc()
+        return render_template('error.html', error=error_msg), 500
 
+@app.route('/weather-impact4')
+def weather_impact4():
+    try:
+        weather = get_weather_impact()
+        return render_template('weather4.html', weather_data=weather)
+    except Exception as e:
+        error_msg = f"Error loading weather impact data: {str(e)}"
+        print(error_msg)
+        import traceback
+        traceback.print_exc()
+        return render_template('error.html', error=error_msg), 500
+        
+@app.route('/solar-forecast')
+def solar_forecast():
+    return render_template('components/solar.html')
 if __name__ == '__main__':
     # Start the Flask app
     port = int(os.environ.get('PORT', 5000))
