@@ -16,7 +16,6 @@ node_modules/
 Thumbs.db
 
 # Data & outputs
-*.csv
 *.log
 
 # IDE
